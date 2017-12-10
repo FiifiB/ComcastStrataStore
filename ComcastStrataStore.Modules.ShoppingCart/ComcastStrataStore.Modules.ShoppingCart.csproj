@@ -4,18 +4,19 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{695369A4-5008-4768-A7B8-29889FB6B64D}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <RootNamespace>ComcastStrataStore</RootNamespace>
-    <AssemblyName>ComcastStrataStore</AssemblyName>
+    <ProjectGuid>{656B9CC7-2FBB-435E-85CC-CE812971BA8A}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ComcastStrataStore.Modules.ShoppingCart</RootNamespace>
+    <AssemblyName>ComcastStrataStore.Modules.ShoppingCart</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -25,7 +26,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -50,24 +50,11 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
+    <Compile Include="Models\CartItem.cs" />
+    <Compile Include="Models\ICartItem.cs" />
+    <Compile Include="Models\IShoppingCart.cs" />
+    <Compile Include="Models\ShoppingCart.cs" />
+    <Compile Include="ShoppingCartModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -81,6 +68,24 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ViewModels\CustomerLoginViewModel.cs" />
+    <Compile Include="ViewModels\ICustomerLoginViewModel.cs" />
+    <Compile Include="ViewModels\IOrderRetrievalViewModel.cs" />
+    <Compile Include="ViewModels\IShoppingCartViewModel.cs" />
+    <Compile Include="ViewModels\OrderRetrievalViewModel.cs" />
+    <Compile Include="ViewModels\ShoppingCartViewModel.cs" />
+    <Compile Include="Views\CustomerLoginView.xaml.cs">
+      <DependentUpon>CustomerLoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ICustomerLoginView.cs" />
+    <Compile Include="Views\IOrderRetrievalView.cs" />
+    <Compile Include="Views\IShoppingCartView.cs" />
+    <Compile Include="Views\OrderRetrievalView.xaml.cs">
+      <DependentUpon>OrderRetrievalView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShoppingCartView.xaml.cs">
+      <DependentUpon>ShoppingCartView.xaml</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -89,9 +94,34 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <ProjectReference Include="..\ComcastStrataStore.Infrastructure\ComcastStrataStore.Infrastructure.csproj">
+      <Project>{356624f8-8858-4b0a-9981-6930f27441bf}</Project>
+      <Name>ComcastStrataStore.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StoreEDM\StoreEDM.csproj">
+      <Project>{f459d6af-e19c-428e-be8b-427f2487fea7}</Project>
+      <Name>StoreEDM</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\CustomerLoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OrderRetrievalView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ShoppingCartView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Prism.Unity" Version="6.3.0" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,9 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.13
+VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComcastStrataStore", "ComcastStrataStore\ComcastStrataStore.csproj", "{695369A4-5008-4768-A7B8-29889FB6B64D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComcastStrataStore.Shell", "ComcastStrataStore\ComcastStrataStore.Shell.csproj", "{695369A4-5008-4768-A7B8-29889FB6B64D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", "{F3386F54-7638-48A9-8275-79D96D3B884B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Store", "Store", "{0263BBED-8446-4603-B13E-1BE771731A50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreEDM", "StoreEDM\StoreEDM.csproj", "{F459D6AF-E19C-428E-BE8B-427F2487FEA7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{A67479E6-CC9C-4E9A-9451-A2D0CE7E8538}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComcastStrataStore.Modules.ShoppingCart", "ComcastStrataStore.Modules.ShoppingCart\ComcastStrataStore.Modules.ShoppingCart.csproj", "{656B9CC7-2FBB-435E-85CC-CE812971BA8A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{C828F356-5B68-44F6-90A1-C9AF80D98017}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComcastStrataStore.Infrastructure", "ComcastStrataStore.Infrastructure\ComcastStrataStore.Infrastructure.csproj", "{356624F8-8858-4B0A-9981-6930F27441BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreDAL", "StoreDAL\StoreDAL.csproj", "{5CB0B818-D44A-4009-BF4C-4E6FA4459BFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +31,34 @@ Global
 		{695369A4-5008-4768-A7B8-29889FB6B64D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{695369A4-5008-4768-A7B8-29889FB6B64D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{695369A4-5008-4768-A7B8-29889FB6B64D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F459D6AF-E19C-428E-BE8B-427F2487FEA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F459D6AF-E19C-428E-BE8B-427F2487FEA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F459D6AF-E19C-428E-BE8B-427F2487FEA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F459D6AF-E19C-428E-BE8B-427F2487FEA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{656B9CC7-2FBB-435E-85CC-CE812971BA8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{656B9CC7-2FBB-435E-85CC-CE812971BA8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{656B9CC7-2FBB-435E-85CC-CE812971BA8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{656B9CC7-2FBB-435E-85CC-CE812971BA8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{356624F8-8858-4B0A-9981-6930F27441BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{356624F8-8858-4B0A-9981-6930F27441BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{356624F8-8858-4B0A-9981-6930F27441BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{356624F8-8858-4B0A-9981-6930F27441BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CB0B818-D44A-4009-BF4C-4E6FA4459BFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CB0B818-D44A-4009-BF4C-4E6FA4459BFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CB0B818-D44A-4009-BF4C-4E6FA4459BFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CB0B818-D44A-4009-BF4C-4E6FA4459BFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0263BBED-8446-4603-B13E-1BE771731A50} = {F3386F54-7638-48A9-8275-79D96D3B884B}
+		{F459D6AF-E19C-428E-BE8B-427F2487FEA7} = {0263BBED-8446-4603-B13E-1BE771731A50}
+		{656B9CC7-2FBB-435E-85CC-CE812971BA8A} = {A67479E6-CC9C-4E9A-9451-A2D0CE7E8538}
+		{356624F8-8858-4B0A-9981-6930F27441BF} = {C828F356-5B68-44F6-90A1-C9AF80D98017}
+		{5CB0B818-D44A-4009-BF4C-4E6FA4459BFF} = {0263BBED-8446-4603-B13E-1BE771731A50}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EDC0AD25-E669-454E-AEEE-1E15664EAC77}
 	EndGlobalSection
 EndGlobal

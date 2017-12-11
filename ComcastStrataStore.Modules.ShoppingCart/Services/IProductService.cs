@@ -15,5 +15,8 @@ namespace ComcastStrataStore.Modules.ShoppingCart.Services
 
         //Method to get Id
         ProductEntity GetProduct(int Id);
+
+        //Method to update a specific product with an order
+        void UpdateProductWithOrder(int Id, int OrderId);
     }
 }

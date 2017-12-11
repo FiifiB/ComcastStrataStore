@@ -22,5 +22,11 @@ namespace ComcastStrataStore.Modules.ShoppingCart.Services
             IProductBL productBL = new ProductBL();
             return productBL.GetProduct(Id);
         }
+
+        public void UpdateProductWithOrder(int Id, int OrderId)
+        {
+            IProductBL productBL = new ProductBL();
+            productBL.UpdateProductWithOrder(Id, OrderId);
+        }
     }
 }

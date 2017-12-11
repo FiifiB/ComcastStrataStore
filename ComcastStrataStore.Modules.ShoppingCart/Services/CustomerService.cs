@@ -21,35 +21,16 @@ namespace ComcastStrataStore.Modules.ShoppingCart.Services
         public CustomerEntity GetCustomer(string name, string email)
         {
             ICustomerBL customerBL = new CustomerBL();
-            var customer = customerBL.GetCustomer(name, email);
+            var customer = customerBL.GetCustomer(name, email);            
 
-            CustomerEntity customerEntity = new CustomerEntity()
-            {
-                Id = customer.Id,
-                Name = customer.Name,
-                Email = customer.E_mail,
-                Balance = customer.Balance,
-                Spend = customer.Spend,                
+            return customer;
 
-            };
+        }
 
-            switch (customer.Loyalty_status)
-            {
-                case "Standard":
-                    customerEntity.LoyaltyStatus = ViewModels.CustomerLoyaltyType.Standard;
-                    break;
-                case "Silver":
-                    customerEntity.LoyaltyStatus = ViewModels.CustomerLoyaltyType.Silver;
-                    break;
-                case "Gold":
-                    customerEntity.LoyaltyStatus = ViewModels.CustomerLoyaltyType.Gold;
-                    break;
-                default:
-                    break;
-            }
-
-            return customerEntity;
-
+        public void UpdateBalance(string name, string email, double spend)
+        {
+            ICustomerBL customerBL = new CustomerBL();
+            customerBL.UpdateBalance(name, email, spend);
         }
     }
 }

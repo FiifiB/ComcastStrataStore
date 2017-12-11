@@ -13,7 +13,8 @@ namespace StoreDAL
         {
             using (StoreEntities context = new StoreEntities())
             {
-                List<Product> products = context.Products.ToList();
+                //Gets all products that havent been ordered
+                List<Product> products = context.Products.Where(p => p.ShopOrder == null).ToList();
 
                 return products;
             }
@@ -25,6 +26,16 @@ namespace StoreDAL
             {
                 Product product = context.Products.Where(p => p.Id == Id).FirstOrDefault();
                 return product;
+            }
+        }
+
+        public void UpdateProductWithOrder(int Id, int OrderId)
+        {
+            using (StoreEntities context = new StoreEntities())
+            {
+                Product product = context.Products.Where(p => p.Id == Id).FirstOrDefault();
+                product.Shop_Order = OrderId;
+                context.SaveChanges();
             }
         }
     }

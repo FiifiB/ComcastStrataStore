@@ -44,5 +44,11 @@ namespace ComcastStrataStore.Modules.ShoppingCart.Business.Product
             };
             return productEntity;
         }
+
+        public void UpdateProductWithOrder(int Id, int OrderId)
+        {
+            ProductDAL productDAL = new ProductDAL();
+            productDAL.UpdateProductWithOrder(Id, OrderId);
+        }
     }
 }

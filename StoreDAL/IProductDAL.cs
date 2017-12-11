@@ -11,6 +11,6 @@ namespace StoreDAL
     {
         List<Product> GetAllProducts();
         Product GetProduct(int Id);
-        void UpdateProductInOrder(int Id, int OrderId);
+        void UpdateProductWithOrder(int Id, int OrderId);
     }
 }

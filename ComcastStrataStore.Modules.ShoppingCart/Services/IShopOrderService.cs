@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ComcastStrataStore.Modules.ShoppingCart.Business.ShopOrder
+namespace ComcastStrataStore.Modules.ShoppingCart.Services
 {
-    public interface IShopOrderBL
+    public interface IShopOrderService
     {
         ObservableCollection<ShopOrderEntity> GetOrderInDateRange(int id, DateTime from, DateTime to);
         ShopOrderEntity GetOrderById(int id, int OrderId);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ComcastStrataStore.Modules.ShoppingCart.UIEntities;
 using StoreEDM;
 
 namespace ComcastStrataStore.Modules.ShoppingCart.Business.Customer
@@ -13,10 +14,10 @@ namespace ComcastStrataStore.Modules.ShoppingCart.Business.Customer
         bool DoesCustomerExist(string name, string email);
 
         //Method get customer details
-        StoreEDM.Customer GetCustomer(string name, string email);
+        CustomerEntity GetCustomer(string name, string email);
 
-        //Method to update balance and update loyalty status
+        //Method to update balance and update loyalty status and spend
         void UpdateBalance(string name, string email, double spend);
-        
+
     }
 }

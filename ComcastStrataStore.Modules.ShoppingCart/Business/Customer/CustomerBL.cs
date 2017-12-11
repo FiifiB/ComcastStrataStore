@@ -1,4 +1,5 @@
-﻿using StoreDAL;
+﻿using ComcastStrataStore.Modules.ShoppingCart.UIEntities;
+using StoreDAL;
 using StoreEDM;
 using System;
 using System.Collections.Generic;
@@ -32,13 +33,38 @@ namespace ComcastStrataStore.Modules.ShoppingCart.Business.Customer
         /// <param name="name"></param>
         /// <param name="email"></param>
         /// <returns></returns>
-        public StoreEDM.Customer GetCustomer(string name, string email)
+        public CustomerEntity GetCustomer(string name, string email)
         {
             ICustomerDAL customerDAL = new CustomerDAL();
-            var result = customerDAL.GetCustomer(name, email);
-            if (result == null)
+            var customer = customerDAL.GetCustomer(name, email);
+            if (customer == null)
                 throw new Exception("Account doesnt exist");
-            return result;
+
+            CustomerEntity customerEntity = new CustomerEntity()
+            {
+                Id = customer.Id,
+                Name = customer.Name,
+                Email = customer.E_mail,
+                Balance = customer.Balance,
+                Spend = customer.Spend,
+
+            };
+
+            switch (customer.Loyalty_status)
+            {
+                case "Standard":
+                    customerEntity.LoyaltyStatus = ViewModels.CustomerLoyaltyType.Standard;
+                    break;
+                case "Silver":
+                    customerEntity.LoyaltyStatus = ViewModels.CustomerLoyaltyType.Silver;
+                    break;
+                case "Gold":
+                    customerEntity.LoyaltyStatus = ViewModels.CustomerLoyaltyType.Gold;
+                    break;
+                default:
+                    break;
+            }
+            return customerEntity;
         }
 
         /// <summary>
@@ -79,5 +105,6 @@ namespace ComcastStrataStore.Modules.ShoppingCart.Business.Customer
             customerDAL.UpdateCustomer(customerUpdated, customer.Name, customer.E_mail);
 
         }
+
     }
 }

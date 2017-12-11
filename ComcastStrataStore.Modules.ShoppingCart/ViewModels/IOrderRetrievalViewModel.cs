@@ -1,5 +1,6 @@
 ﻿using ComcastStrataStore.Infrastructure;
 using ComcastStrataStore.Modules.ShoppingCart.UIEntities;
+using Prism.Commands;
 using StoreEDM;
 using System;
 using System.Collections.Generic;
@@ -15,13 +16,29 @@ namespace ComcastStrataStore.Modules.ShoppingCart.ViewModels
         //A list of Customer Orders to be displayed
         ObservableCollection<ShopOrderEntity> UserOrders { get; set; }
 
+        string IdTextBox { get; set; }
+
+        DateTime FromSelectedDate { get; set; }
+        DateTime ToSelectedDate { get; set; }
+
+        //Command to search for order by Id
+        DelegateCommand SearchByIdCommand { get; set; }
+
+        //Command to search for order by  Date Range
+        DelegateCommand SearchByDateRangeCommand { get; set; }
+
+        DelegateCommand GetAllOrdersCommand { get; set; }
+
         //Method to return an order by its id
-        void GetOrderById(int id);
+        void GetOrderById();
 
         //Method to get order by date range
-        void GetOrderByDateRange(int id, DateTime from, DateTime to);
+        void GetOrderByDateRange();
 
         //Method to get all orders by User
-        void GetAllOrdersByUser(int id);
+        void GetAllOrdersByUser();
+
+        //Call back for receiving message with user data
+        void RecieveAccountInfo(CustomerEntity customerEntity);
     }
 }

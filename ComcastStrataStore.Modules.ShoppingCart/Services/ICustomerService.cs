@@ -12,5 +12,7 @@ namespace ComcastStrataStore.Modules.ShoppingCart.Services
         bool DoesCustomerExist(string name, string email);
 
         CustomerEntity GetCustomer(string name, string email);
+
+        void UpdateBalance(string name, string email, double spend);
     }
 }

@@ -64,7 +64,9 @@
     <Compile Include="Services\Events.cs" />
     <Compile Include="Services\ICustomerService.cs" />
     <Compile Include="Services\IProductService.cs" />
+    <Compile Include="Services\IShopOrderService.cs" />
     <Compile Include="Services\ProductService.cs" />
+    <Compile Include="Services\ShopOrderService.cs" />
     <Compile Include="ShoppingCartModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

@@ -13,5 +13,7 @@ namespace ComcastStrataStore.Modules.ShoppingCart.Business.Product
         ProductEntity GetProduct(int Id);
 
         ObservableCollection<ProductEntity> GetAllProducts();
+
+        void UpdateProductWithOrder(int Id, int OrderId);
     }
 }

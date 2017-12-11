@@ -5,8 +5,30 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ComcastStrataStore.Modules.ShoppingCart.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
-    </Grid>
+             d:DesignHeight="800" d:DesignWidth="800">
+    <StackPanel Margin="0,20,0,0">
+        <Label HorizontalAlignment="Center"> Orders </Label>
+        <ListBox ItemsSource="{Binding UserOrders}" Width="250" Height="400" HorizontalAlignment="Center">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Id}" />
+                        <TextBlock Padding="5,0,5,0" Text="{Binding PurchaseDate}" />                        
+                        <TextBlock Text="{Binding TotalCost}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+            <Label Margin="0,0,10,0">OrderId</Label>
+            <TextBox Width="150" Margin="0,0,10,0" Text="{Binding IdTextBox}"/>
+            <Button Width="100" Content="Search By Id" Command="{Binding SearchByIdCommand}"/>
+            <Button Width="100" Content="Get All Orders" Command="{Binding GetAllOrdersCommand}" Margin="10,0,0,0"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,30,0,0">
+            <Calendar SelectedDate="{Binding FromSelectedDate}"/>
+            <Calendar SelectedDate="{Binding ToSelectedDate}" Margin="50,0,0,0"/>
+            <Button Width="150" Height="28" Content="Search By Date Range" Margin="30,0,0,0" Command="{Binding SearchByDateRangeCommand}"/>
+        </StackPanel>
+    </StackPanel>
 </UserControl>

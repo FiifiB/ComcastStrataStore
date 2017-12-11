@@ -13,8 +13,8 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding NumberOfProducts}" />
                         <TextBlock Padding="5,0,5,0" Text="{Binding NameOfProduct}" />
-                        <Button Width="15" Content="-" Command="{Binding DecreaseItemCommand}" CommandParameter="{Binding NameOfProduct}"/>
-                        <Button Width="15" Content="+" Command="{Binding IncreaseItemCommand}" CommandParameter="{Binding NameOfProduct}"/>
+                        <Button Width="15" Content="-" Command="{Binding DataContext.DecreaseItemCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding NameOfProduct}"/>
+                        <Button Width="15" Content="+" Command="{Binding DataContext.IncreaseItemCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding NameOfProduct}"/>
                         <TextBlock Text="{Binding TotalPrice}" />
                     </StackPanel>
                 </DataTemplate>

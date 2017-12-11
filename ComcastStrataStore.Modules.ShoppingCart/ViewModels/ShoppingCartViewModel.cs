@@ -47,7 +47,7 @@ namespace ComcastStrataStore.Modules.ShoppingCart.ViewModels
             IncreaseItemCommand = new DelegateCommand<string>(IncreaseQuantityOfItem);
             DecreaseItemCommand = new DelegateCommand<string>(DecreaseQuantityOfItem);
             AddItemCommand = new DelegateCommand(AddToShoppingCart);
-            PurchaseCartCommand = new DelegateCommand(PurchaseItemsInCart, CanPurchaseItem);
+            PurchaseCartCommand = new DelegateCommand(PurchaseItemsInCart);
 
             //Get all products to simulate SKU access
             ProductService service = new ProductService();
@@ -78,7 +78,7 @@ namespace ComcastStrataStore.Modules.ShoppingCart.ViewModels
 
         public void IncreaseQuantityOfItem(string itemName)
         {
-            var availableProduct = productsInDB.First(p => p.Name == itemName);
+            var availableProduct = productsInDB.FirstOrDefault(p => p.Name == itemName);
             if (availableProduct != null)
             {
                 ShoppingCart.AddItemToCart(availableProduct);
@@ -152,6 +152,61 @@ namespace ComcastStrataStore.Modules.ShoppingCart.ViewModels
             {
                 throw new Exception("Insufficient Funds");
             }
+
+            ShopOrderService shopOrderService = new ShopOrderService();
+            ProductService productService = new ProductService();
+
+            //Create new Order
+            ShopOrderEntity shopOrderEntity = new ShopOrderEntity()
+            {
+                Id = new Random().Next(1,10000),
+                CustomerIde = OwnerOfCart.Id,
+                PurchaseDate = DateTime.Now,
+                TotalCost = totalWithDiscount
+            };
+
+            var newOrderId = shopOrderEntity.Id;
+            shopOrderService.CreateOrder(shopOrderEntity);
+
+            //Update products in order with new order
+            var currentCartItems = ShoppingCart.CartItems;
+            foreach (var item in currentCartItems)
+            {
+                foreach (var productItem in item.Products)
+                {
+                    productService.UpdateProductWithOrder(productItem.Id, newOrderId);
+                }
+            }
+
+            //Update User Balance
+            CustomerService customerService = new CustomerService();
+            customerService.UpdateBalance(OwnerOfCart.Name, OwnerOfCart.Email, totalWithDiscount);
+            var newTotalSpend = OwnerOfCart.Spend + totalWithDiscount;
+            CustomerLoyaltyType newLoyaltyStatus;
+            if (newTotalSpend > 1500)
+            {
+                newLoyaltyStatus = CustomerLoyaltyType.Gold;
+            }
+            else if (newTotalSpend > 500)
+            {
+                newLoyaltyStatus = CustomerLoyaltyType.Silver;
+            }
+            else
+            {
+                newLoyaltyStatus = CustomerLoyaltyType.Standard;
+            }
+
+            OwnerOfCart.Balance -= totalWithDiscount;
+            OwnerOfCart.LoyaltyStatus = newLoyaltyStatus;
+            OwnerOfCart.Spend = newTotalSpend;
+
+            //Shop Order View
+            IRegion region = _regionManager.Regions[RegionNames.MainRegion];
+            var vm = _container.Resolve<IOrderRetrievalViewModel>();
+            _eventAggregator.GetEvent<RecieveUserDataEvent>().Publish(OwnerOfCart);
+            region.Remove(View);
+            region.Add(vm.View);
+            region.Activate(vm.View);
 
         }
 

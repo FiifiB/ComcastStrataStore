@@ -6,6 +6,7 @@ using Microsoft.Practices.Unity;
 using Prism.Unity;
 using ComcastStrataStore.Modules.ShoppingCart.ViewModels;
 using ComcastStrataStore.Infrastructure;
+using Unity;
 
 namespace ComcastStrataStore.Modules.ShoppingCart
 {
@@ -14,10 +15,11 @@ namespace ComcastStrataStore.Modules.ShoppingCart
         private IRegionManager _regionManager;
         private IUnityContainer _container;
 
-        public ShoppingCartModule(UnityContainer container, RegionManager regionManager)
+        public ShoppingCartModule(IUnityContainer container, IRegionManager regionManager)
         {
             _container = container;
             _regionManager = regionManager;
+            
         }
 
         public void Initialize()
@@ -25,7 +27,7 @@ namespace ComcastStrataStore.Modules.ShoppingCart
             RegisterViewAndServices();
 
             IRegion region = _regionManager.Regions[RegionNames.MainRegion];
-            var vm = _container.Resolve<CustomerLoginViewModel>();
+            var vm = _container.Resolve<ICustomerLoginViewModel>();
             region.Add(vm.View);
             region.Activate(vm.View);
         }
@@ -34,6 +36,12 @@ namespace ComcastStrataStore.Modules.ShoppingCart
         {
             _container.RegisterType<ICustomerLoginView,CustomerLoginView>();
             _container.RegisterType<ICustomerLoginViewModel, CustomerLoginViewModel>();
+
+            _container.RegisterType<IShoppingCartView, ShoppingCartView>();
+            _container.RegisterType<IShoppingCartViewModel, ShoppingCartViewModel>();
+
+            _container.RegisterType<IOrderRetrievalView, OrderRetrievalView>();
+            _container.RegisterType<IOrderRetrievalViewModel, OrderRetrievalViewModel>();
         }
     }
 }

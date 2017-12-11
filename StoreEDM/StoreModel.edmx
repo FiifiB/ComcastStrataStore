@@ -9,11 +9,12 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="E-mail" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Balance" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Loyalty status" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="E-mail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Balance" Type="float" Nullable="false" />
+          <Property Name="Loyalty status" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Spend" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -22,13 +23,13 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Name" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="Unit Price" Type="float" Nullable="false" />
-          <Property Name="Shop Order Id" Type="int" />
+          <Property Name="Shop Order" Type="int" />
         </EntityType>
         <EntityType Name="ShopOrder">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Customer_Id" Type="int" Nullable="false" />
           <Property Name="Purchase Date" Type="datetime" Nullable="false" />
           <Property Name="Total Cost" Type="float" Nullable="false" />
@@ -38,10 +39,10 @@
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ShopOrder">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Product">
-              <PropertyRef Name="Shop Order Id" />
+              <PropertyRef Name="Shop Order" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -91,11 +92,12 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="E_mail" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Balance" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Loyalty_status" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="E_mail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Balance" Type="Double" Nullable="false" />
+          <Property Name="Loyalty_status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Spend" Type="Double" Nullable="false" />
           <NavigationProperty Name="ShopOrders" Relationship="StoreModel.FK_ShopOrder_Customer" FromRole="Customer" ToRole="ShopOrder" />
         </EntityType>
         <EntityType Name="Product">
@@ -105,14 +107,14 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Unit_Price" Type="Double" Nullable="false" />
-          <Property Name="Shop_Order_Id" Type="Int32" />
+          <Property Name="Shop_Order" Type="Int32" />
           <NavigationProperty Name="ShopOrder" Relationship="StoreModel.FK_Product_ShopOrder" FromRole="Product" ToRole="ShopOrder" />
         </EntityType>
         <EntityType Name="ShopOrder">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Customer_Id" Type="Int32" Nullable="false" />
           <Property Name="Purchase_Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Total_Cost" Type="Double" Nullable="false" />
@@ -136,10 +138,10 @@
           <End Type="StoreModel.Product" Role="Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ShopOrder">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Product">
-              <PropertyRef Name="Shop_Order_Id" />
+              <PropertyRef Name="Shop_Order" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -152,6 +154,7 @@
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="StoreModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Spend" ColumnName="Spend" />
                 <ScalarProperty Name="Loyalty_status" ColumnName="Loyalty status" />
                 <ScalarProperty Name="Balance" ColumnName="Balance" />
                 <ScalarProperty Name="E_mail" ColumnName="E-mail" />
@@ -163,7 +166,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="StoreModel.Product">
               <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="Shop_Order_Id" ColumnName="Shop Order Id" />
+                <ScalarProperty Name="Shop_Order" ColumnName="Shop Order" />
                 <ScalarProperty Name="Unit_Price" ColumnName="Unit Price" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -176,7 +179,7 @@
                 <ScalarProperty Name="Total_Cost" ColumnName="Total Cost" />
                 <ScalarProperty Name="Purchase_Date" ColumnName="Purchase Date" />
                 <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
-                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ComcastStrataStore.Infrastructure
+namespace ComcastStrataStore.Modules.ShoppingCart.Business.ShopOrder
 {
-    class Events
+    public class ShopOrderBL : IShopOrderBL
     {
     }
 }

@@ -6,7 +6,17 @@
              xmlns:local="clr-namespace:ComcastStrataStore.Modules.ShoppingCart.Views"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <Button>THis is a test button</Button>
-    </Grid>
+    <StackPanel HorizontalAlignment="Center" Margin="0,50,0,0">
+        <Label>Enter User Details</Label>
+        <StackPanel Orientation="Horizontal">
+            <Label>Name</Label>
+            <TextBox Text="{Binding CustomerName}"  Margin="10,0,10,0" Width="210"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label>Email</Label>
+            <TextBox Text="{Binding CustomerEmail}" Margin="14,0,10,0" Width="210"/>
+        </StackPanel>
+        <Button Command="{Binding LoginCommand}">Login</Button>
+        
+    </StackPanel>
 </UserControl>

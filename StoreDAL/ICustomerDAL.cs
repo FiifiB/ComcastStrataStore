@@ -10,6 +10,8 @@ namespace StoreDAL
     public interface ICustomerDAL
     {
         List<Customer> GetAllCustomers();
-        Customer GetCustomer(string name);
+        Customer GetCustomer(string name, string email);
+        void UpdateCustomer(Customer newUpdatedCustomer, string name, string email);
+        float GetCustomerBalance(string name);
     }
 }

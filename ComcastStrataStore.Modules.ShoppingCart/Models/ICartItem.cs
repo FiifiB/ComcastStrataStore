@@ -1,4 +1,5 @@
-﻿using StoreEDM;
+﻿using ComcastStrataStore.Modules.ShoppingCart.UIEntities;
+using StoreEDM;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,21 +10,35 @@ using System.Threading.Tasks;
 
 namespace ComcastStrataStore.Modules.ShoppingCart.Models
 {
-    public interface ICartItem : INotifyPropertyChanged
+    public interface ICartItem 
     {
-        //CartItem Name which is also the name of the product it holds
+        /// <summary>
+        /// artItem Name which is also the name of the product it holds
+        /// </summary>
         string NameOfProduct { get; set; }
 
-        //Collection to hold one type of product
-        ObservableCollection<Product> Products { get; set; }
+        /// <summary>
+        /// Collection to hold one type of product
+        /// </summary>
+        ObservableCollection<ProductEntity> Products { get; set; }
 
-        //Number of products in cart item
-        int NumberOfProducts { get; set; }
+        /// <summary>
+        /// Number of products in cart item
+        /// </summary>
+        int NumberOfProducts { get; }
 
-        //The price of one product
+        /// <summary>
+        /// The price of one product
+        /// </summary>
         float Price { get; set; }
 
-        //The total price of the product
-        float TotalPrice { get; set; }
+        /// <summary>
+        /// The total price of the product
+        /// </summary>
+        float TotalPrice { get; }
+
+        void IncreaseCartItem();
+
+        void DecreaseCartItem();
     }
 }

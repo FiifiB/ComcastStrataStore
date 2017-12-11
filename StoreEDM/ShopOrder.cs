@@ -20,7 +20,7 @@ namespace StoreEDM
             this.Products = new HashSet<Product>();
         }
     
-        public int id { get; set; }
+        public int Id { get; set; }
         public int Customer_Id { get; set; }
         public System.DateTime Purchase_Date { get; set; }
         public double Total_Cost { get; set; }

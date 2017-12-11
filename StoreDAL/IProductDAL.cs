@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StoreEDM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,10 @@ using System.Threading.Tasks;
 
 namespace StoreDAL
 {
-    class IProductDAL
+    public interface IProductDAL
     {
+        List<Product> GetAllProducts();
+        Product GetProduct(int Id);
+        void UpdateProductInOrder(int Id, int OrderId);
     }
 }

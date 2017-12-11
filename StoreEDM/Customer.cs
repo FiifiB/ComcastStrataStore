@@ -23,8 +23,9 @@ namespace StoreEDM
         public int Id { get; set; }
         public string Name { get; set; }
         public string E_mail { get; set; }
-        public string Balance { get; set; }
+        public double Balance { get; set; }
         public string Loyalty_status { get; set; }
+        public double Spend { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ShopOrder> ShopOrders { get; set; }

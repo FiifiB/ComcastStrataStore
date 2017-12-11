@@ -17,7 +17,7 @@ namespace StoreEDM
         public int Id { get; set; }
         public string Name { get; set; }
         public double Unit_Price { get; set; }
-        public Nullable<int> Shop_Order_Id { get; set; }
+        public Nullable<int> Shop_Order { get; set; }
     
         public virtual ShopOrder ShopOrder { get; set; }
     }
